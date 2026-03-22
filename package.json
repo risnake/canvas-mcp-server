@@ -1,0 +1,51 @@
+{
+  "name": "@risnake/canvas-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for Canvas LMS API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "canvas-mcp-server": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc && node dist/index.js",
+    "prepack": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "canvas",
+    "lms"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/risnake/canvas-mcp-server.git"
+  },
+  "homepage": "https://github.com/risnake/canvas-mcp-server",
+  "bugs": {
+    "url": "https://github.com/risnake/canvas-mcp-server/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "dotenv": "^17.3.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.33",
+    "typescript": "^5.8.3"
+  }
+}
