@@ -72,6 +72,20 @@ bunx @risnake/canvas-mcp-server
 - Discussions, announcements, and calendar data
 - Users, conversations, and miscellaneous Canvas utilities
 
-## Publishing notes
+## Publishing
 
-The package is configured for scoped public publishing and includes the built `dist/` output plus this README when packed or published.
+Local publishing currently requires authenticating with npm first, for example:
+
+```bash
+npm login
+npm publish
+```
+
+GitHub Actions publishing requires adding an `NPM_TOKEN` repository secret. Once that secret exists, the `Publish package` workflow can be run manually from GitHub Actions or triggered by pushing a version tag such as `v1.0.0`.
+
+After publishing, the package is installable with:
+
+```bash
+npx -y @risnake/canvas-mcp-server
+bunx @risnake/canvas-mcp-server
+```
