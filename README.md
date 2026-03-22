@@ -1,31 +1,46 @@
-# @risnake/canvas-mcp-server
+# @rishblob/canvas-mcp-server
 
-A TypeScript Model Context Protocol (MCP) server for Canvas LMS. It exposes Canvas API operations over stdio so MCP-compatible clients can work with courses, assignments, modules, discussions, files, users, and other Canvas resources.
+TypeScript MCP server for Canvas LMS. It runs over stdio and exposes Canvas API workflows for courses, assignments, submissions, modules, pages, discussions, announcements, files, users, enrollments, conversations, calendar, and utility endpoints.
+
+This package is published to npm as `@rishblob/canvas-mcp-server`.
+
+## Requirements
+
+- Node.js `>=18`
+- Canvas API token
 
 ## Environment variables
 
-- `CANVAS_API_TOKEN` **required**: Canvas API bearer token used for authentication
-- `CANVAS_BASE_URL` optional: Base URL for your Canvas instance, for example `https://school.instructure.com`
+- `CANVAS_API_TOKEN` **required**: Canvas bearer token for API authentication.
+- `CANVAS_BASE_URL` optional: Canvas host URL (example: `https://school.instructure.com`).
 
-If `CANVAS_BASE_URL` is not set, the server uses the project's current built-in default.
+If `CANVAS_BASE_URL` is omitted, the server defaults to `https://houstonisd.instructure.com`.
 
-## Local build and run
+## Install and run locally
 
 ```bash
 npm install
 npm run build
-node dist/index.js
+npm start
 ```
 
-For a quick local development run:
+For one-shot local development:
 
 ```bash
 npm run dev
 ```
 
+## Use as a published npm package
+
+```bash
+npx -y @rishblob/canvas-mcp-server
+# or
+bunx @rishblob/canvas-mcp-server
+```
+
 ## MCP client configuration
 
-### Local build
+### Option 1: Run from local build
 
 ```json
 {
@@ -42,14 +57,14 @@ npm run dev
 }
 ```
 
-### Published package with npx
+### Option 2: Run from npm (recommended)
 
 ```json
 {
   "mcpServers": {
     "canvas": {
       "command": "npx",
-      "args": ["-y", "@risnake/canvas-mcp-server"],
+      "args": ["-y", "@rishblob/canvas-mcp-server"],
       "env": {
         "CANVAS_API_TOKEN": "your-canvas-token",
         "CANVAS_BASE_URL": "https://school.instructure.com"
@@ -59,33 +74,26 @@ npm run dev
 }
 ```
 
-After publishing, this package can also be started with:
+## Available MCP tools
 
-```bash
-bunx @risnake/canvas-mcp-server
-```
+- Courses: `list_courses`, `get_course`, `list_students`, `get_course_settings`
+- Assignments/submissions: `list_assignments`, `get_assignment`, `create_assignment`, `update_assignment`, `list_submissions`, `get_submission`, `grade_submission`
+- Users: `get_user_profile`, `get_user`, `list_course_users`
+- Announcements: `list_announcements`, `create_announcement`
+- Modules: `list_modules`, `get_module`, `list_module_items`
+- Discussions: `list_discussions`, `get_discussion`, `create_discussion`, `list_discussion_entries`
+- Calendar: `list_calendar_events`, `create_calendar_event`
+- Files: `list_files`, `get_file`, `list_folders`
+- Pages: `list_pages`, `get_page`, `create_page`, `update_page`
+- Enrollments: `list_enrollments`, `get_user_enrollments`
+- Conversations: `list_conversations`, `get_conversation`, `create_conversation`
+- Misc: `list_todo_items`, `search_courses`, `get_course_activity_stream`
 
-## Major tool groups
-
-- Courses and enrollments
-- Assignments, modules, pages, and files
-- Discussions, announcements, and calendar data
-- Users, conversations, and miscellaneous Canvas utilities
-
-## Publishing
-
-Local publishing currently requires authenticating with npm first, for example:
+## Publish to npm
 
 ```bash
 npm login
 npm publish
 ```
 
-GitHub Actions publishing requires adding an `NPM_TOKEN` repository secret. Once that secret exists, the `Publish package` workflow can be run manually from GitHub Actions or triggered by pushing a version tag such as `v1.0.0`.
-
-After publishing, the package is installable with:
-
-```bash
-npx -y @risnake/canvas-mcp-server
-bunx @risnake/canvas-mcp-server
-```
+`prepack` runs `npm run build`, so package artifacts are built automatically before publish.

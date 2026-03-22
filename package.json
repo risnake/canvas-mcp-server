@@ -1,5 +1,5 @@
 {
-  "name": "@risnake/canvas-mcp-server",
+  "name": "@rishblob/canvas-mcp-server",
   "version": "1.0.0",
   "description": "MCP server for Canvas LMS API",
   "main": "dist/index.js",
